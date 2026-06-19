@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start \"\" \"C:\\\\Users\\\\chiar\\\\Downloads\\\\readytoantwerp_game\\\\ready-to-antwerp-catch-game.html\")"
+    ]
+  }
+}
