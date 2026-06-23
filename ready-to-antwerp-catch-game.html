@@ -49,20 +49,23 @@
     font-family:'PP Editorial New', serif;
   }
 
-  #page{
+  html,body,#page{
+    margin:0; padding:0;
     width:100%; height:100%;
-    min-height:100vh;
-    display:flex; align-items:center; justify-content:center;
-    background:#1c1c1c;
+    overflow:hidden;
+    background:var(--cream);
+  }
+  #page{
+    position:relative;
   }
 
   #stage{
-    position:relative;
+    position:absolute;
+    top:0; left:0;
     width:402px; height:874px;
     background:var(--cream);
     overflow:hidden;
-    border-radius: 0px;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+    transform-origin:top left;
     user-select:none;
     touch-action:none;
   }
@@ -259,12 +262,9 @@
   function resizeStage(){
     const vw = window.innerWidth;
     const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-    const scaleW = vw / 402;
-    const scaleH = vh / 874;
-    const s = Math.min(scaleW, scaleH);
-    stage.style.transform = 'scale(' + s + ')';
-    stage.style.marginLeft = ((vw - 402 * s) / 2) + 'px';
-    stage.style.marginTop = ((vh - 874 * s) / 2) + 'px';
+    const sx = vw / 402;
+    const sy = vh / 874;
+    stage.style.transform = 'scale(' + sx + ',' + sy + ')';
   }
   resizeStage();
   window.addEventListener('resize', resizeStage);
