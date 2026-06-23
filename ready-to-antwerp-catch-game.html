@@ -258,7 +258,7 @@
 
   function resizeStage(){
     const vw = window.innerWidth;
-    const vh = window.innerHeight;
+    const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
     const scaleW = vw / 402;
     const scaleH = vh / 874;
     const s = Math.min(scaleW, scaleH);
@@ -268,6 +268,7 @@
   }
   resizeStage();
   window.addEventListener('resize', resizeStage);
+  if(window.visualViewport) window.visualViewport.addEventListener('resize', resizeStage);
   const playArea = document.getElementById('play-area');
   const player = document.getElementById('player');
   const gameContent = document.getElementById('game-content');
