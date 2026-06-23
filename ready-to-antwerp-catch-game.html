@@ -127,7 +127,7 @@
   /* ---------- PLAY AREA ---------- */
   #play-area{
     position:absolute;
-    top:96px; left:0; width:402px; height:700px;
+    top:96px; left:0; width:402px; bottom:0;
     overflow:hidden;
   }
 
@@ -262,9 +262,16 @@
   function resizeStage(){
     const vw = window.innerWidth;
     const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-    const sx = vw / 402;
-    const sy = vh / 874;
-    stage.style.transform = 'scale(' + sx + ',' + sy + ')';
+    const s = vw / 402;
+    STAGE_H = Math.round(vh / s);
+    PLAY_H = STAGE_H - PLAY_TOP;
+    stage.style.height = STAGE_H + 'px';
+    stage.style.transform = 'scale(' + s + ')';
+    playerY = PLAY_H - PLAYER_BOTTOM_OFFSET - PLAYER_H;
+    player.style.top = playerY + 'px';
+    const arrowY2 = playerY + PLAYER_H * 0.4;
+    arrowLeft.style.top = arrowY2 + 'px';
+    arrowRight.style.top = arrowY2 + 'px';
   }
   resizeStage();
   window.addEventListener('resize', resizeStage);
@@ -279,16 +286,15 @@
   const progressFill = document.getElementById('progress-fill');
   const endScreen = document.getElementById('end-screen');
 
-  const STAGE_W = 402, STAGE_H = 874;
-  const PLAY_TOP = 96;          // top of #play-area relative to stage
-  const PLAY_H = 700;
-  const PLAY_BOTTOM = PLAY_TOP + PLAY_H;
+  const STAGE_W = 402;
+  const PLAY_TOP = 96;
+  let STAGE_H, PLAY_H;
   const MARGIN_X = 16;
   const GAME_DURATION = 60; // seconds
 
   const PLAYER_W = 128, PLAYER_H = 130;
   const PLAYER_BOTTOM_OFFSET = 20;
-  const playerY = PLAY_H - PLAYER_BOTTOM_OFFSET - PLAYER_H; // top, in play-area local coords
+  let playerY = 0;
 
   // catch zone = top portion of the player sprite (the tray)
   const CATCH_ZONE_H = PLAYER_H * 0.30;
