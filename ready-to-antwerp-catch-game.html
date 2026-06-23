@@ -207,8 +207,19 @@
     z-index:60;
     opacity:0; pointer-events:none;
     transition: opacity 0.4s ease;
+    display:flex; align-items:center; justify-content:center;
   }
   #end-screen.show{ opacity:1; pointer-events:auto; }
+  #restart-btn{
+    border:1px solid var(--ink);
+    border-radius:999px;
+    background:var(--ink);
+    color:var(--cream);
+    height:40px; padding:0 24px;
+    font-family:'PP Editorial New', serif;
+    font-style:italic; font-size:15px;
+    cursor:pointer;
+  }
 
 </style>
 </head>
@@ -245,7 +256,7 @@
       <div id="countdown-number"></div>
     </div>
 
-    <div id="end-screen"></div>
+    <div id="end-screen"><button id="restart-btn" onclick="location.reload()">restart game</button></div>
 
   </div>
 </div>
