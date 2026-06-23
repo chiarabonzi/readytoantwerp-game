@@ -255,6 +255,19 @@
   };
 
   const stage = document.getElementById('stage');
+
+  function resizeStage(){
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const scaleW = vw / 402;
+    const scaleH = vh / 874;
+    const s = Math.min(scaleW, scaleH);
+    stage.style.transform = 'scale(' + s + ')';
+    stage.style.marginLeft = ((vw - 402 * s) / 2) + 'px';
+    stage.style.marginTop = ((vh - 874 * s) / 2) + 'px';
+  }
+  resizeStage();
+  window.addEventListener('resize', resizeStage);
   const playArea = document.getElementById('play-area');
   const player = document.getElementById('player');
   const gameContent = document.getElementById('game-content');
